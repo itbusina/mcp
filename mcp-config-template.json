@@ -8,6 +8,7 @@
       "command": "dotnet",
       "args": ["run", "--project", "/Users/kirylbahdanovich/Google/itbusinakirylbahdanovich@gmail.com/GitHub/mcp/jira/", "--no-build"],
       "env": {
+        "JIRA_HOST": "https://<your-domain>.atlassian.net",
         "JIRA_USER": "<JIRA_USER>",
         "JIRA_TOKEN": "<JIRA_TOKEN>"
       }
