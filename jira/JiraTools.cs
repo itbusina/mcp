@@ -6,10 +6,10 @@ namespace jira;
 [McpServerToolType]
 public static class JiraTools
 {
-    [McpServerTool, Description("Jira Search.")]
+    [McpServerTool, Description("Jira Search. Gets issues (tasks, stories, defects, etc.) based on JQL (Jira Query Language).")]
     public static async Task<string> Search(
         HttpClient client,
-        [Description("The Jira query language")] string jql,
+        [Description("The Jira Query Language.")] string jql,
         [Description("The index of the first issue to return (pagination). Optional.")] int? startAt = 0,
         [Description("The maximum number of issues to return (pagination). Optional. Min 1, Max 1000. Default 10.")] int? maxResults = 10,
         [Description("Comma-separated list of fields to include in the response. Optional.")] string? fields = null,
