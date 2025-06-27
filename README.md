@@ -1,0 +1,14 @@
+# MCP Project
+
+This repository contains tools and utilities for working with the Model Context Protocol (MCP)
+
+## Tools
+
+### 1. jira-mcp
+- **Location:** `jira-mcp/`
+- **Description:**
+  - A .NET tool for integrating Jira with MCP.
+  - Contains utilities for interacting with Jira APIs and processing data for MCP workflows.
+- **More details:** See [`jira-mcp/README.md`](jira-mcp/README.md)
+
+
