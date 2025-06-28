@@ -41,11 +41,6 @@ namespace itbusina.sonar
             return await _httpClient.GetFromJsonAsync<FavoriteProjectsSearchResponse>($"api/favorites/search?p={page}&ps={pageSize}");
         }
 
-        public async Task<ProjectsSearchResponse?> GetProjectsAsync(string query = "", int page = 1, int pageSize = 100)
-        {
-            return await _httpClient.GetFromJsonAsync<ProjectsSearchResponse>($"api/projects/search?q={query}&p={page}&ps={pageSize}");
-        }
-
         public async Task<ProjectStatusResponse?> GetProjectQualityGateStatusAsync(string? projectKey = null, string? analysisId= null, string? branch= null, string? projectId= null, string? pullRequest= null)
         {
             var url = $"api/qualitygates/project_status?projectKey={projectKey}";
