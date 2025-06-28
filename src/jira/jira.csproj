@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../../dependencies/itbusina.jira/itbusina.jira.csproj" />
+    <ProjectReference Include="../common/common.csproj" />
   </ItemGroup>
 
 </Project>

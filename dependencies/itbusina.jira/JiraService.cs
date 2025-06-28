@@ -1,19 +1,14 @@
-using Microsoft.Extensions.Logging;
-
 namespace itbusina.jira
 {
     public class JiraService
     {
         private readonly HttpClient _httpClient;
-        private readonly ILogger<JiraService> _logger;
         private readonly string _apiVersion;
 
-        public JiraService(ILogger<JiraService> logger, string jiraHost, string? jiraUser, string jiraToken, string jiraAuthType, string apiVersion)
+        public JiraService(string jiraHost, string? jiraUser, string jiraToken, string jiraAuthType, string apiVersion)
         {
             if (apiVersion != "2" && apiVersion != "3")
                 throw new InvalidOperationException($"JIRA_API_VERSION must be '2' or '3'. Current value: '{apiVersion}'");
-
-            _logger = logger;
 
             _apiVersion = apiVersion;
 
@@ -48,16 +43,7 @@ namespace itbusina.jira
             // Use the API version from the environment variable
             var endpoint = $"/rest/api/{_apiVersion}/search?{string.Join("&", queryParams)}";
 
-            // Log the request
-            _logger.LogInformation("Making GET request to Jira API: {Endpoint}", endpoint);
-
-            var response = await _httpClient.GetAsync(endpoint);
-            response.EnsureSuccessStatusCode();
-            var json = await response.Content.ReadAsStringAsync();
-
-            // Log the response
-            _logger.LogInformation("Received response from Jira API: {Json}", json);
-
+            var json = await _httpClient.GetStringAsync(endpoint);
             return json;
         }
     }

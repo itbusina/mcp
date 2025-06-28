@@ -46,8 +46,7 @@ builder.Services.AddSingleton<JiraService>(sp =>
     var jiraAuthType = Environment.GetEnvironmentVariable("JIRA_AUTH_TYPE")?.ToLower() ?? "bearer";
     var apiVersion = Environment.GetEnvironmentVariable("JIRA_API_VERSION") ?? throw new InvalidOperationException("JIRA_API_VERSION environment variable is not set.");
     
-    var logger = sp.GetRequiredService<ILogger<JiraService>>();
-    return new JiraService(logger, jiraHost, jiraUser, jiraToken, jiraAuthType, apiVersion);
+    return new JiraService(jiraHost, jiraUser, jiraToken, jiraAuthType, apiVersion);
 });
 
 var app = builder.Build();
