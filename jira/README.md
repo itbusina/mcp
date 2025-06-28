@@ -35,6 +35,7 @@ To add the jira mcp use the following configuration:
       ],
       "env": {
         "JIRA_HOST": "https://your-domain.atlassian.net",
+        "JIRA_API_VERSION": "2", // or "3" (default is "2" if not set)
         "JIRA_AUTH_TYPE": "basic", // or "bearer" (default)
         "JIRA_USER": "your-email@domain.com", // required for basic auth
         "JIRA_TOKEN": "YOUR_JIRA_API_TOKEN" // or PAT for bearer
@@ -44,7 +45,12 @@ To add the jira mcp use the following configuration:
 }
 ```
 
-Replace the values in `env` with your actual Jira host, authentication type, user email (for basic auth), and Jira API token. If using bearer authentication, set only `JIRA_HOST` and `JIRA_TOKEN` (or PAT). Adjust the `args` path to match your project location.
+
+Replace the values in `env` with your actual Jira host, API version, authentication type, user email (for basic auth), and Jira API token. 
+
+**JIRA_API_VERSION**: Set to `2` or `3` depending on your Jira Cloud API version. If not set, defaults to `2`. For most Jira Cloud instances, version `2` is recommended for compatibility. 
+
+If using bearer authentication, set only `JIRA_HOST`, `JIRA_API_VERSION` (if needed), and `JIRA_TOKEN` (or PAT). Adjust the `args` path to match your project location.
 
 
 ## Logging
