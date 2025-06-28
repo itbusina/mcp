@@ -19,10 +19,10 @@ namespace itbusina.sonar
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<MeasureComponentResponse?> GetMeasureAsync(string projectName)
+        public async Task<MeasureComponentResponse?> GetMeasureAsync(string component)
         {
-            var url = string.Format(SonarConstants.MeasuresApiTemplate, projectName) + string.Format(SonarConstants.MetricKeysTemplate, string.Join(SonarConstants.MetricsSeparator, SonarConstants.SonarMetrics));
-            return await _httpClient.GetFromJsonAsync<MeasureComponentResponse>(url);
+            var metrics = string.Join(SonarConstants.MetricsSeparator, SonarConstants.SonarMetrics);
+            return await _httpClient.GetFromJsonAsync<MeasureComponentResponse>($"api/measures/component?component={component}&metricKeys={metrics}");
         }
 
         public async Task<MeasureSearchHistoryResponse?> GetHistoryAsync(string projectName, int page)

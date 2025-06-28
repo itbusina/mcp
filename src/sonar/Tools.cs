@@ -62,5 +62,18 @@ namespace sonar
                 return JsonSerializer.Serialize(response);
             });
         }
+
+        [McpServerTool, Description("Return component with specified measures. The componentId or the component parameter must be provided.")]
+        public static async Task<string> GetMeasures(
+            SonarClient client,
+            ILogger<Tool> logger,
+            [Description("The component name. Required.")] string component)
+        {
+            return await logger.ExecuteAndLog(nameof(GetMeasures), async () =>
+            {
+                var response = await client.GetMeasureAsync(component);
+                return JsonSerializer.Serialize(response);
+            });
+        }
     }
 }
