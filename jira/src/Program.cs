@@ -6,6 +6,7 @@ using NLog;
 using NLog.Extensions.Logging;
 using NLog.Config;
 using NLog.Targets;
+using itbusina.jira;
 
 // Programmatic NLog configuration
 LogManager.Configuration = new LoggingConfiguration
@@ -37,7 +38,7 @@ builder.Services.AddMcpServer()
     .WithToolsFromAssembly();
 
 // Register JiraService with API version and connection details from environment variables
-builder.Services.AddSingleton<jira.JiraService>(sp =>
+builder.Services.AddSingleton<JiraService>(sp =>
 {
     var jiraHost = Environment.GetEnvironmentVariable("JIRA_HOST") ?? throw new InvalidOperationException("JIRA_HOST environment variable is not set.");
     var jiraUser = Environment.GetEnvironmentVariable("JIRA_USER");
@@ -45,8 +46,8 @@ builder.Services.AddSingleton<jira.JiraService>(sp =>
     var jiraAuthType = Environment.GetEnvironmentVariable("JIRA_AUTH_TYPE")?.ToLower() ?? "bearer";
     var apiVersion = Environment.GetEnvironmentVariable("JIRA_API_VERSION") ?? throw new InvalidOperationException("JIRA_API_VERSION environment variable is not set.");
     
-    var logger = sp.GetRequiredService<ILogger<jira.JiraService>>();
-    return new jira.JiraService(logger, jiraHost, jiraUser, jiraToken, jiraAuthType, apiVersion);
+    var logger = sp.GetRequiredService<ILogger<JiraService>>();
+    return new JiraService(logger, jiraHost, jiraUser, jiraToken, jiraAuthType, apiVersion);
 });
 
 var app = builder.Build();

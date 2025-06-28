@@ -1,8 +1,7 @@
 using Microsoft.Extensions.Logging;
 
-namespace jira
+namespace itbusina.jira
 {
-
     public class JiraService
     {
         private readonly HttpClient _httpClient;
@@ -28,7 +27,7 @@ namespace jira
             {
                 "basic" => string.IsNullOrEmpty(jiraUser)
                     ? throw new InvalidOperationException("JIRA_USER environment variable must be set for basic authentication.")
-                    : new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{jiraUser}:{jiraToken}"))),
+                    : new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{jiraUser}:{jiraToken}"))),
                 "bearer" => new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jiraToken),
                 _ => throw new InvalidOperationException($"Unknown JIRA_AUTH_TYPE: {jiraAuthType}. Supported values are 'basic' or 'bearer'.")
             };

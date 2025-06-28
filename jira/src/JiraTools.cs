@@ -1,3 +1,4 @@
+using itbusina.jira;
 using ModelContextProtocol.Server;
 using System.ComponentModel;
 
