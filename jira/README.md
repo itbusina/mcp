@@ -32,7 +32,7 @@ To add the jira mcp use the following configuration:
       "args": [
         "run",
         "--project",
-        "/path/to/your/jira-mcp/src",
+        "/path/to/your/jira/src",
         "--no-build"
       ],
       "env": {
