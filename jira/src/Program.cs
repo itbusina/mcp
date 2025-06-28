@@ -64,8 +64,18 @@ builder.Services.AddSingleton(_ =>
     return httpClient;
 });
 
-// Register JiraService
-builder.Services.AddSingleton<jira.JiraService>();
+
+// Register JiraService with API version from environment variable
+builder.Services.AddSingleton<jira.JiraService>(sp =>
+{
+    var apiVersion = Environment.GetEnvironmentVariable("JIRA_API_VERSION") ?? "2";
+    if (apiVersion != "2" && apiVersion != "3")
+        throw new InvalidOperationException($"JIRA_API_VERSION must be '2' or '3'. Current value: '{apiVersion}'");
+
+    var httpClient = sp.GetRequiredService<HttpClient>();
+    var logger = sp.GetRequiredService<ILogger<jira.JiraService>>();
+    return new jira.JiraService(httpClient, logger, apiVersion);
+});
 
 var app = builder.Build();
 

@@ -2,10 +2,11 @@ using Microsoft.Extensions.Logging;
 
 namespace jira
 {
-    public class JiraService(HttpClient httpClient, ILogger<JiraService> logger)
+    public class JiraService(HttpClient httpClient, ILogger<JiraService> logger, string apiVersion)
     {
         private readonly HttpClient _httpClient = httpClient;
         private readonly ILogger<JiraService> _logger = logger;
+        private readonly string _apiVersion = apiVersion;
 
         public async Task<string> SearchAsync(string jql, int? startAt = 0, int? maxResults = 10, string? fields = null, string? expand = null)
         {
@@ -19,7 +20,8 @@ namespace jira
             if (!string.IsNullOrWhiteSpace(expand))
                 queryParams.Add($"expand={Uri.EscapeDataString(expand)}");
 
-            var endpoint = $"/rest/api/3/search?{string.Join("&", queryParams)}";
+            // Use the API version from the environment variable
+            var endpoint = $"/rest/api/{_apiVersion}/search?{string.Join("&", queryParams)}";
 
             // Log the request
             _logger.LogInformation("Making GET request to Jira API: {Endpoint}", endpoint);
