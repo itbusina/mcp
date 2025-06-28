@@ -19,7 +19,7 @@ dotnet build
 
 ## MCP Setup
 
-To add the jira mcp use the following configuration:
+Create `mcp.json` file in the project `.vscode` root:
 
 ```jsonc
 {
@@ -62,5 +62,3 @@ jira/src/bin/Debug/net8.0/logs/app.log
 ```
 
 This log file contains information about server startup, environment variable usage, requests, and errors. You can use it to troubleshoot issues or monitor the application's activity.
-
-Place your `mcp.json` file in the project root or specify its path as required by your implementation.
