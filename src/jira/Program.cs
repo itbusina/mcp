@@ -15,7 +15,7 @@ LogManager.Configuration = new LoggingConfiguration
     {
         new LoggingRule("*", NLog.LogLevel.Info, new FileTarget("logfile")
         {
-            FileName = Environment.GetEnvironmentVariable("JIRA_LOG_FILE") ?? "logs/app.log",
+            FileName = Environment.GetEnvironmentVariable("LOG_FILE") ?? "logs/app.log",
             Layout = "${longdate}|${level:uppercase=true}|${logger}|${message} ${exception}",
             CreateDirs = true
         })
