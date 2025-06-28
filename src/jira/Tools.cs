@@ -5,7 +5,7 @@ using System.ComponentModel;
 namespace jira
 {
     [McpServerToolType]
-    public static class JiraTools
+    public static class Tools
     {
         [McpServerTool, Description("Jira Search. Gets tickets (tasks, stories, defects, etc.) based on JQL (Jira Query Language).")]
         public static async Task<string> Search(
