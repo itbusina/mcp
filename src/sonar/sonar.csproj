@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../../dependencies/itbusina.sonar/itbusina.sonar.csproj" />
+    <ProjectReference Include="../common/common.csproj" />
   </ItemGroup>
 
 </Project>

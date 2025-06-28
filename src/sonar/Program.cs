@@ -48,13 +48,13 @@ static string? GetEnvironmentVariable(string name, bool required = true)
 }
 
 // Register SonarService with API version and connection details from environment variables
-builder.Services.AddSingleton<SonarApiClient>(sp =>
+builder.Services.AddSingleton<SonarClient>(sp =>
 {
-    var host = GetEnvironmentVariable("SONAR_HOST", false) ?? "https://sonarcloud.io";
+    var host = GetEnvironmentVariable("SONAR_HOST") ?? throw new ArgumentNullException("{SONAR_HOST} is not set.");
     var token = GetEnvironmentVariable("SONAR_TOKEN", false);
 
-    var logger = sp.GetRequiredService<ILogger<SonarApiClient>>();
-    return new SonarApiClient(host, token);
+    var logger = sp.GetRequiredService<ILogger<SonarClient>>();
+    return new SonarClient(host, token);
 });
 
 
