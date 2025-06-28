@@ -2,11 +2,37 @@ using Microsoft.Extensions.Logging;
 
 namespace jira
 {
-    public class JiraService(HttpClient httpClient, ILogger<JiraService> logger, string apiVersion)
+
+    public class JiraService
     {
-        private readonly HttpClient _httpClient = httpClient;
-        private readonly ILogger<JiraService> _logger = logger;
-        private readonly string _apiVersion = apiVersion;
+        private readonly HttpClient _httpClient;
+        private readonly ILogger<JiraService> _logger;
+        private readonly string _apiVersion;
+
+        public JiraService(ILogger<JiraService> logger, string jiraHost, string? jiraUser, string jiraToken, string jiraAuthType, string apiVersion)
+        {
+            if (apiVersion != "2" && apiVersion != "3")
+                throw new InvalidOperationException($"JIRA_API_VERSION must be '2' or '3'. Current value: '{apiVersion}'");
+
+            _logger = logger;
+
+            _apiVersion = apiVersion;
+
+            _httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(jiraHost)
+            };
+            _httpClient.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("jira-mcp", "1.0"));
+            _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            _httpClient.DefaultRequestHeaders.Authorization = (jiraAuthType?.ToLower() ?? "bearer") switch
+            {
+                "basic" => string.IsNullOrEmpty(jiraUser)
+                    ? throw new InvalidOperationException("JIRA_USER environment variable must be set for basic authentication.")
+                    : new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", System.Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{jiraUser}:{jiraToken}"))),
+                "bearer" => new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", jiraToken),
+                _ => throw new InvalidOperationException($"Unknown JIRA_AUTH_TYPE: {jiraAuthType}. Supported values are 'basic' or 'bearer'.")
+            };
+        }
 
         public async Task<string> SearchAsync(string jql, int? startAt = 0, int? maxResults = 10, string? fields = null, string? expand = null)
         {
@@ -32,7 +58,7 @@ namespace jira
 
             // Log the response
             _logger.LogInformation("Received response from Jira API: {Json}", json);
-            
+
             return json;
         }
     }
