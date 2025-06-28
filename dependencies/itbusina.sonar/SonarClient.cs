@@ -46,9 +46,19 @@ namespace itbusina.sonar
             return await _httpClient.GetFromJsonAsync<ProjectsSearchResponse>($"api/projects/search?q={query}&p={page}&ps={pageSize}");
         }
 
-        public async Task<ProjectStatusResponse?> GetProjectStatusAsync(string projectName)
+        public async Task<ProjectStatusResponse?> GetProjectQualityGateStatusAsync(string? projectKey = null, string? analysisId= null, string? branch= null, string? projectId= null, string? pullRequest= null)
         {
-            return await _httpClient.GetFromJsonAsync<ProjectStatusResponse>($"api/qualitygates/project_status?projectKey={projectName}");
+            var url = $"api/qualitygates/project_status?projectKey={projectKey}";
+            if (!string.IsNullOrEmpty(analysisId))
+                url += $"&analysisId={analysisId}";
+            if (!string.IsNullOrEmpty(branch))
+                url += $"&branch={branch}";
+            if (!string.IsNullOrEmpty(projectId))
+                url += $"&projectId={projectId}";
+            if (!string.IsNullOrEmpty(pullRequest))
+                url += $"&pullRequest={pullRequest}";
+
+            return await _httpClient.GetFromJsonAsync<ProjectStatusResponse>(url);
         }
 
         public async Task<QualityGateResponse?> GetQualityGateByProjectAsync(string organization, string projectName)

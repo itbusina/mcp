@@ -9,7 +9,7 @@ using System.Text.Json;
 
 namespace sonar
 {
-    [McpServerToolType]
+    [McpServerToolType, Description("Tools to access SonarCloud and SonarQube REST API.")]
     public static class Tools
     {
         [McpServerTool, Description("Search for the authenticated user favorites. Requires authentication.")]
@@ -26,6 +26,40 @@ namespace sonar
             {
                 var favorites = await client.GetFavoritesAsync(page, pageSize);
                 return JsonSerializer.Serialize(favorites);
+            });
+        }
+
+        [McpServerTool, Description("Get the quality gate of a project.")]
+        public static async Task<string> GetProjectQualityGate(
+            SonarClient client,
+            ILogger<Tool> logger,
+            [Description("Organization key. Required.")] string organization,
+            [Description("Project key. Required.")] string project)
+        {
+            return await logger.ExecuteAndLog(nameof(GetProjectQualityGate), async () =>
+            {
+                var response = await client.GetQualityGateByProjectAsync(organization, project);
+                return JsonSerializer.Serialize(response);
+            });
+        }
+
+        [McpServerTool, Description(@"Get the quality gate status of a project or a Compute Engine task.
+            Either 'analysisId', 'projectId' or 'projectKey' must be provided
+            The different statuses returned are: OK, WARN, ERROR, NONE. The NONE status is returned when there is no quality gate associated with the analysis.")]
+        public static async Task<string> GetProjectQualityGateStatus(
+            SonarClient client,
+            ILogger<Tool> logger,
+            [Description("Analysis id. Optional. Example: 'AU-TpxcA-iU5OvuD2FL1'")] string? analysisId = null,
+            [Description("Branch key. Optional. Example: 'feature/my_branch'")] string? branch = null,
+            [Description("Project id. Optional. Doesn't work with branches or pull requests. Example: 'AU-Tpxb--iU5OvuD2FLy'")] string? projectId = null,
+            [Description("Project key. Optional. Example: 'my_project'")] string? projectKey = null,
+            [Description("Pull request id. Optional. Example: '5461'")] string? pullRequest = null
+            )
+        {
+            return await logger.ExecuteAndLog(nameof(GetProjectQualityGate), async () =>
+            {
+                var response = await client.GetProjectQualityGateStatusAsync(projectKey, analysisId, branch, projectId, pullRequest);
+                return JsonSerializer.Serialize(response);
             });
         }
     }
