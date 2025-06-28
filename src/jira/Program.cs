@@ -8,14 +8,14 @@ using NLog.Config;
 using NLog.Targets;
 using itbusina.jira;
 
-// Programmatic NLog configuration
+// Programmatic NLog configuration with log file path from environment variable (inline)
 LogManager.Configuration = new LoggingConfiguration
 {
     LoggingRules =
     {
         new LoggingRule("*", NLog.LogLevel.Info, new FileTarget("logfile")
         {
-            FileName = "logs/app.log",
+            FileName = Environment.GetEnvironmentVariable("JIRA_LOG_FILE") ?? "logs/app.log",
             Layout = "${longdate}|${level:uppercase=true}|${logger}|${message} ${exception}",
             CreateDirs = true
         })
