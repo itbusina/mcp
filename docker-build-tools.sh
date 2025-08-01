@@ -1,2 +1,3 @@
-docker build -t jira-mcp:latest -f src/jira-mcp/Dockerfile .
-docker build -t qtest-mcp:latest -f src/qtest-mcp/Dockerfile .
+docker build -t itbusina/jira-mcp:latest -f src/jira-mcp/Dockerfile .
+docker build -t itbusina/qtest-mcp:latest -f src/qtest-mcp/Dockerfile .
+docker build -t itbusina/sonar-mcp:latest -f src/sonar-mcp/Dockerfile .
