@@ -23,7 +23,7 @@ cd <repo-url>
 docker build -t itbusina/sonar-mcp:latest -f src/sonar-mcp/Dockerfile .
 ```
 
-3. **Configure JIRA credentials and server:**
+## MCP config
 
 Open MCP config file and setup MCP server. Set your Sonar host and token in the `env` section.
 

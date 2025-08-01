@@ -24,7 +24,7 @@ cd <repo-url>
 docker build -t itbusina/qtest-mcp:latest -f src/qtest-mcp/Dockerfile .
 ```
 
-3. **Configure qTest credentials and server:**
+## MCP config
 
 Open MCP config file and setup MCP for qTest. Set your qTest host and PAT in the `env` section.
 

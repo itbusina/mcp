@@ -33,7 +33,7 @@ cd <repo-url>
 docker build -t itbusina/jira-mcp:latest -f src/jira-mcp/Dockerfile .
 ```
 
-3. **Configure JIRA credentials and server:**
+## MCP config
 
 Open MCP config file and setup MCP for JIRA. Set your JIRA host and PAT in the `env` section.
 
