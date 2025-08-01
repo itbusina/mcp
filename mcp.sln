@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sonar-mcp", "src\sonar-mcp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testlemon-mcp", "src\testlemon-mcp\testlemon-mcp.csproj", "{BC0B0B87-1FA7-4E18-8161-00D5B89C8862}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "textogo-mcp", "src\textogo-mcp\textogo-mcp.csproj", "{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,6 +87,18 @@ Global
 		{BC0B0B87-1FA7-4E18-8161-00D5B89C8862}.Release|x64.Build.0 = Release|Any CPU
 		{BC0B0B87-1FA7-4E18-8161-00D5B89C8862}.Release|x86.ActiveCfg = Release|Any CPU
 		{BC0B0B87-1FA7-4E18-8161-00D5B89C8862}.Release|x86.Build.0 = Release|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Debug|x64.Build.0 = Debug|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Debug|x86.Build.0 = Debug|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Release|x64.ActiveCfg = Release|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Release|x64.Build.0 = Release|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Release|x86.ActiveCfg = Release|Any CPU
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -95,6 +109,7 @@ Global
 		{58080032-DD34-4F36-A0D3-B8B27464709F} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{EE1990AB-15A3-4C3A-B703-D168A1B4A678} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{BC0B0B87-1FA7-4E18-8161-00D5B89C8862} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{98EEB6A8-4185-41CF-ACE6-EF3DADA12408} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {867FD144-7BAB-43B9-9611-92DB3D99E2F6}
