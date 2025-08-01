@@ -1,6 +1,5 @@
 
 using itbusina.sonar;
-using common;
 using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Protocol;
 using ModelContextProtocol.Server;
@@ -22,11 +21,8 @@ namespace sonar
             page ??= 1;
             pageSize ??= 100;
 
-            return await logger.ExecuteAndLog(nameof(GetFavorites), async () =>
-            {
-                var favorites = await client.GetFavoritesAsync(page, pageSize);
-                return JsonSerializer.Serialize(favorites);
-            });
+            var favorites = await client.GetFavoritesAsync(page, pageSize);
+            return JsonSerializer.Serialize(favorites);
         }
 
         [McpServerTool, Description("Get the quality gate of a project.")]
@@ -36,11 +32,8 @@ namespace sonar
             [Description("Organization key. Required.")] string organization,
             [Description("Project key. Required.")] string project)
         {
-            return await logger.ExecuteAndLog(nameof(GetProjectQualityGate), async () =>
-            {
-                var response = await client.GetQualityGateByProjectAsync(organization, project);
-                return JsonSerializer.Serialize(response);
-            });
+            var response = await client.GetQualityGateByProjectAsync(organization, project);
+            return JsonSerializer.Serialize(response);
         }
 
         [McpServerTool, Description(@"Get the quality gate status of a project or a Compute Engine task.
@@ -56,11 +49,8 @@ namespace sonar
             [Description("Pull request id. Optional. Example: '5461'")] string? pullRequest = null
             )
         {
-            return await logger.ExecuteAndLog(nameof(GetProjectQualityGate), async () =>
-            {
-                var response = await client.GetProjectQualityGateStatusAsync(projectKey, analysisId, branch, projectId, pullRequest);
-                return JsonSerializer.Serialize(response);
-            });
+            var response = await client.GetProjectQualityGateStatusAsync(projectKey, analysisId, branch, projectId, pullRequest);
+            return JsonSerializer.Serialize(response);
         }
 
         [McpServerTool, Description("Return component with specified measures. The componentId or the component parameter must be provided.")]
@@ -69,11 +59,8 @@ namespace sonar
             ILogger<Tool> logger,
             [Description("The component name. Required.")] string component)
         {
-            return await logger.ExecuteAndLog(nameof(GetMeasures), async () =>
-            {
-                var response = await client.GetMeasureAsync(component);
-                return JsonSerializer.Serialize(response);
-            });
+            var response = await client.GetMeasureAsync(component);
+            return JsonSerializer.Serialize(response);
         }
     }
 }

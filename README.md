@@ -1,14 +1,13 @@
-# MCP Project
+# MCP servers
 
-This repository contains tools and utilities for working with the Model Context Protocol (MCP)
+## JIRA MCP Server
+See [`src/jira-mcp/README.md`](src/jira-mcp/README.md) for detailed information and setup instructions.
 
-## Tools
+## qTest MCP Server
+See [`src/qtest-mcp/README.md`](src/qtest-mcp/README.md) for detailed information and setup instructions.
 
-### 1. jira-mcp
-- **Location:** `jira/`
-- **Description:**
-  - A .NET tool for integrating Jira with MCP.
-  - Contains utilities for interacting with Jira APIs and processing data for MCP workflows.
-- **More details:** See [`jira/README.md`](jira/README.md)
+---
 
+## Contributing
 
+All contributions are welcome via pull requests. Merges require approval from the code owners as specified in the CODEOWNERS file.
