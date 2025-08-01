@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging;
 using ModelContextProtocol.Server;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -31,7 +32,8 @@ public static class Tools
         if (!string.IsNullOrWhiteSpace(expand))
             queryParams.Add($"expand={Uri.EscapeDataString(expand)}");
 
-        var endpoint = $"/rest/api/2/search?{string.Join("&", queryParams)}";
+        var endpoint = $"/rest/api/3/search?{string.Join("&", queryParams)}";
+
         var response = await client.GetAsync(endpoint);
         response.EnsureSuccessStatusCode();
         var json = await response.Content.ReadAsStringAsync();

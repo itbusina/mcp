@@ -57,7 +57,7 @@ Open MCP config file and setup MCP for JIRA. Set your JIRA host and PAT in the `
           "JIRA_HOST": "https://server.com/",
           "JIRA_PAT": "32asd.."
       }
-  }
+    }
   }
 }
 ```

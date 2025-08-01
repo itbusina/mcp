@@ -10,18 +10,26 @@ builder.Services.AddMcpServer()
 
 builder.Services.AddSingleton(_ =>
 {
+    var auth = Environment.GetEnvironmentVariable("JIRA_AUTH_TYPE") ?? "bearer";
+    var user = Environment.GetEnvironmentVariable("JIRA_USER");
     var host = Environment.GetEnvironmentVariable("JIRA_HOST")
         ?? throw new InvalidOperationException("JIRA_HOST environment variable is not set.");
-    var pat = Environment.GetEnvironmentVariable("JIRA_PAT")
-        ?? throw new InvalidOperationException("JIRA_PAT environment variable must be set.");
+    var token = Environment.GetEnvironmentVariable("JIRA_TOKEN")
+        ?? throw new InvalidOperationException("JIRA_TOKEN environment variable must be set.");
 
     // Create an HttpClient with the base address set to the JIRA host
     var client = new HttpClient() { BaseAddress = new Uri(host) };
-    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("itbusina/jira-mcp", "1.0"));
+    client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("itbusina-jira-mcp", "1.0"));
     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-    // Add Bearer Authentication using environment variable JIRA_PAT
-    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", pat);
+    client.DefaultRequestHeaders.Authorization = (auth?.ToLower() ?? "bearer") switch
+            {
+                "basic" => string.IsNullOrEmpty(user)
+                    ? throw new InvalidOperationException("JIRA_USER environment variable must be set for basic authentication.")
+                    : new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes($"{user}:{token}"))),
+                "bearer" => new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token),
+                _ => throw new InvalidOperationException($"Unknown JIRA_AUTH_TYPE: {auth}. Supported values are 'basic' or 'bearer'.")
+            };
 
     return client;
 });
