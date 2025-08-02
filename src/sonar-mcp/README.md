@@ -44,10 +44,10 @@ Open MCP config file and setup MCP server. Set your Sonar host and token in the 
           "itbusina/sonar-mcp:latest"
       ],
       "env": {
-          "JIRA_HOST": "https://server.com/",
-          "JIRA_PAT": "dsads.."
+          "SONAR_HOST": "https://server.com/",
+          "SONAR_TOKEN": "dsads.."
       }
-  }
+    }
   }
 }
 ```
