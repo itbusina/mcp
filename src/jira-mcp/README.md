@@ -40,7 +40,7 @@ Open MCP config file and setup MCP for JIRA. Set your JIRA host and PAT in the `
 ```json
 {
   "servers": {
-    "jira-mcp": {
+    "jira": {
       "type": "stdio",
       "command": "docker",
       "args": [
@@ -50,12 +50,18 @@ Open MCP config file and setup MCP for JIRA. Set your JIRA host and PAT in the `
           "-e",
           "JIRA_HOST",
           "-e",
-          "JIRA_PAT",
+          "JIRA_AUTH_TYPE",
+          "-e",
+          "JIRA_USER",
+          "-e",
+          "JIRA_TOKEN",
           "itbusina/jira-mcp:latest"
       ],
       "env": {
-          "JIRA_HOST": "https://server.com/",
-          "JIRA_PAT": "32asd.."
+          "JIRA_HOST": "https://server.com",
+          "JIRA_AUTH_TYPE": "basic",
+          "JIRA_USER": "user@domain.com",
+          "JIRA_TOKEN": "363194..."
       }
     }
   }
